@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="scripts/app.js"></script>
+    <script src="scripts/rentController.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <meta charset="UTF-8">
+    <title>Renting</title>
+</head>
+
+<body ng-app="rent" ng-controller="rentController" ng-cloak>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Places to rent</h1> </div>
+            <table class="table table-bordered">
+                <tr ng-hide="players.length == 0" class="row">
+                    <td>Link</td>
+                    <td>Location</td>
+                    <td>Price Per Week</td>
+                    <td>Price Per Calendar Month</td>
+                    <td>Notes</td>
+                </tr>
+                <tr class="row" ng-repeat="place in places">
+                    <td>{{place.link}}</td>
+                    <td>{{place.location}}</td>
+                    <td>{{place.pricePerWeek}}</td>
+                    <td>{{place.pricePerMonth}}</td>
+                    <td>{{place.notes}}</td>
+                    <td>
+                        <button class="btn btn-lg btn-danger" ng-click="remove($index)">X</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-lg btn-success" ng-click="update($index)"><i class="ion-checkmark"></i></button>
+                    </td>
+                </tr>
+                <tr class="row">
+                    <td ng-show="players.length == 0">Please enter some names</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form name="placesForm" ng-submit="placesForm.$valid && addPlace(link,location,pricePerWeek,pricePerMonth,notes)">
+                    <div class="form-group">
+                        <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Link to Website" ng-model="link">
+                        <input type="text" name="location" required class="form-control input-lg" ng-minlength="1" placeholder="Location" ng-model="location">
+                        <input type="number" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="pricePerWeek">
+                        <input type="number" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="pricePerMonth">
+                        <input type="text" name="notes" class="form-control input-lg" placeholder="Notes" ng-model="notes"> </div>
+                    <button type="submit" class="btn btn-lg btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
