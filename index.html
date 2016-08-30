@@ -55,8 +55,8 @@
                     <div class="form-group">
                         <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Link to Website" ng-model="link">
                         <input type="text" name="location" required class="form-control input-lg" ng-minlength="1" placeholder="Location" ng-model="location">
-                        <input type="number" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="pricePerWeek">
-                        <input type="number" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="pricePerMonth">
+                        <input type="number" step = "0.01" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="pricePerWeek">
+                        <input type="number" step = "0.01" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="pricePerMonth">
                         <input type="text" name="notes" class="form-control input-lg" placeholder="Notes" ng-model="notes"> </div>
                     <button type="submit" class="btn btn-lg btn-primary">Add</button>
                 </form>

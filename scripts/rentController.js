@@ -1,4 +1,4 @@
-app.controller('rentController', ['$scope', function ($scope) {
+app.controller('rentController', ['$scope', '$filter', function ($scope, $filter) {
     $scope.places = [];
     $scope.addPlace = function (link, location, pricePerWeek, pricePerMonth, notes) {
         var newPlace = {
@@ -16,9 +16,11 @@ app.controller('rentController', ['$scope', function ($scope) {
     $scope.change = function (whichField) {
         if (whichField === 'perweek') {
             $scope.pricePerMonth = (($scope.pricePerWeek * 52) / 12);
+            $scope.pricePerMonth = Math.round($scope.pricePerMonth * 100) /100;
         }
         else {
             $scope.pricePerWeek = (($scope.pricePerMonth * 12) / 52);
+            $scope.pricePerWeek = Math.round($scope.pricePerWeek * 100) /100;
         }
-    };
+};
 }]);
