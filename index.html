@@ -27,20 +27,25 @@
                 <tr ng-hide="players.length == 0" class="row">
                     <td>Link</td>
                     <td>Location</td>
-                    <td>Price Per Week</td>
                     <td>Price Per Calendar Month</td>
                     <td>Notes</td>
+                    <td>Remove</td>
+                    <td>Update</td>
                 </tr>
                 <tr class="row" ng-repeat="place in places">
-                    <td><input class="input input-group" type="url" ng-bind="place.link" ng-model="place.link"></td>
-                    <td><input class="input input-group" type="text" ng-bind="place.location" ng-model="place.location"></td>
-                    <td><input class="input input-group" type="number" ng-bind="place.pricePerMonth" ng-model="place.pricePerMonth"></td>
-                    <td><input class="input input-group" type="text" ng-bind="place.notes" ng-model="place.notes"></td>
                     <td>
-                        <button class="btn btn-lg btn-danger" ng-click="remove($index)">X</button>
+                        <input class="form-control input-lg" type="url" ng-bind="place.link" ng-model="place.link"> </td>
+                    <td>
+                        <input class="form-control input-lg" type="text" ng-bind="place.location" ng-model="place.location"> </td>
+                    <td>
+                        <input class="form-control input-lg" type="number" ng-bind="place.pricePerMonth" ng-model="place.pricePerMonth"> </td>
+                    <td>
+                        <input class="form-control input-lg" type="text" ng-bind="place.notes" ng-model="place.notes"> </td>
+                    <td>
+                        <button class="btn btn-lg btn-danger" ng-click="removePlace($index)">X</button>
                     </td>
                     <td>
-                        <button class="btn btn-lg btn-success" ng-click="update($index)"><i class="ion-checkmark"></i></button>
+                        <button class="btn btn-lg btn-success" ng-click="updateStorage()"><i class="ion-checkmark"></i></button>
                     </td>
                 </tr>
             </table>
@@ -51,11 +56,23 @@
                     <div class="form-group">
                         <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Link to Website" ng-model="link">
                         <input type="text" name="location" required class="form-control input-lg" ng-minlength="1" placeholder="Location" ng-model="location">
-                        <input type="number" step = "0.01" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="pricePerWeek">
-                        <input type="number" step = "0.01" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="pricePerMonth">
+                        <input type="number" step="0.01" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="pricePerWeek">
+                        <input type="number" step="0.01" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="pricePerMonth">
                         <input type="text" name="notes" class="form-control input-lg" placeholder="Notes" ng-model="notes"> </div>
                     <button type="submit" class="btn btn-lg btn-primary">Add</button>
                 </form>
+                <form name="locationForm" ng-submit="locationForm.$valid && addLocation(name,description,latitude,longitude)">
+                    <div class="form-group">
+                        <input type="text" name="name" required class="form-control input-lg" placeholder="Location Name" ng-model="name">
+                        <input type="text" name="description" required class="form-control input-lg" placeholder="Location Description" ng-model="description">
+                        <input type="text" name="latitude" disabled placeholder="latitude" ng-model="latitude">
+                        <input type="text" name="longitude" disabled class="disabled" placeholder="longitude" ng-model="longitude"> </div>
+                    <button class="btn btn-lg btn-info" ng-click="lookupLocation()">Lookup Location</button>
+                    <button type="submit" class="btn btn-lg btn-primary">Add</button>
+                </form>
+                <ul ng-repeat="loc in locations">
+                    <li>{{loc.description}}</li>
+                </ul>
             </div>
         </div>
     </div>
