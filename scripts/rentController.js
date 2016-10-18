@@ -15,7 +15,13 @@ app.controller('rentController', ['$scope', '$filter', function ($scope, $filter
             $scope.locations = JSON.parse(tmpLocations);
         }
     };
-    $scope.updateStorage = function () {
+    $scope.clearAll = function (){
+        $scope.places = [];
+        $scope.locations = [];
+        $scope.updatePlaces();
+        updateLocations();
+    };
+    $scope.updatePlaces = function () {
         localStorage.setItem("places", JSON.stringify($scope.places));
     };
     var updateLocations = function () {
@@ -32,11 +38,11 @@ app.controller('rentController', ['$scope', '$filter', function ($scope, $filter
             , "notes": notes
         };
         $scope.places = $scope.places.concat(newPlace);
-        $scope.updateStorage();
+        $scope.updatePlaces();
     };
     $scope.removePlace = function ($index) {
         $scope.places.splice($index, 1);
-        $scope.updateStorage();
+        $scope.updatePlaces();
     };
     $scope.addLocation = function (name, description, latitude, longitude) {
         var newLocation = {
