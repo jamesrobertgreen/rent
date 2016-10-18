@@ -32,20 +32,16 @@
                     <td>Notes</td>
                 </tr>
                 <tr class="row" ng-repeat="place in places">
-                    <td>{{place.link}}</td>
-                    <td>{{place.location}}</td>
-                    <td>{{place.pricePerWeek}}</td>
-                    <td>{{place.pricePerMonth}}</td>
-                    <td>{{place.notes}}</td>
+                    <td><input class="input input-group" type="url" ng-bind="place.link" ng-model="place.link"></td>
+                    <td><input class="input input-group" type="text" ng-bind="place.location" ng-model="place.location"></td>
+                    <td><input class="input input-group" type="number" ng-bind="place.pricePerMonth" ng-model="place.pricePerMonth"></td>
+                    <td><input class="input input-group" type="text" ng-bind="place.notes" ng-model="place.notes"></td>
                     <td>
                         <button class="btn btn-lg btn-danger" ng-click="remove($index)">X</button>
                     </td>
                     <td>
                         <button class="btn btn-lg btn-success" ng-click="update($index)"><i class="ion-checkmark"></i></button>
                     </td>
-                </tr>
-                <tr class="row">
-                    <td ng-show="players.length == 0">Please enter some names</td>
                 </tr>
             </table>
         </div>
