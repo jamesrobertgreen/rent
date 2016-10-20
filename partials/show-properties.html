@@ -1,0 +1,37 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">Places to rent</h1> </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <tr ng-hide="players.length == 0" class="row">
+                        <td>Link</td>
+                        <td>Location</td>
+                        <td>Price Per Calendar Month</td>
+                        <td>Notes</td>
+                        <td>Remove</td>
+                        <td>Update</td>
+                    </tr>
+                    <tr class="row" ng-repeat="place in places">
+                        <td>
+                            <input class="form-control input-lg" type="url" ng-bind="place.link" ng-model="place.link"> </td>
+                        <td>
+                            <input class="form-control input-lg" type="text" ng-bind="place.location" ng-model="place.location"> </td>
+                        <td>
+                            <input class="form-control input-lg" type="number" ng-bind="place.pricePerMonth" ng-model="place.pricePerMonth"> </td>
+                        <td>
+                            <input class="form-control input-lg" type="text" ng-bind="place.notes" ng-model="place.notes"> </td>
+                        <td>
+                            <button class="btn btn-lg btn-danger" ng-click="removePlace($index)">X</button>
+                        </td>
+                        <td>
+                            <button class="btn btn-lg btn-success" ng-click="updatePlaces()"><i class="ion-checkmark"></i></button>
+                        </td>
+                    </tr>
+                </table>
+                <button class="btn btn-warning" ng-click="clearAll()">Clear All Data</button>
+            </div>
+        </div>
+    </div>
+</div>

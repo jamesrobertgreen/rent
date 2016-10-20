@@ -1,4 +1,5 @@
 app.controller('rentController', ['$scope', '$filter', function ($scope, $filter) {
+    $scope.activeMenu = 'my-properties';
     $scope.init = function () {
         var tmpPlaces = localStorage.getItem("places");
         if (tmpPlaces === '' || tmpPlaces === undefined || tmpPlaces === null) {
@@ -15,7 +16,7 @@ app.controller('rentController', ['$scope', '$filter', function ($scope, $filter
             $scope.locations = JSON.parse(tmpLocations);
         }
     };
-    $scope.clearAll = function (){
+    $scope.clearAll = function () {
         $scope.places = [];
         $scope.locations = [];
         $scope.updatePlaces();

@@ -2,15 +2,16 @@
 <html>
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/rentController.js"></script>
     <link rel="stylesheet" type="text/css" href="css/app.css">
@@ -20,62 +21,19 @@
 
 <body ng-app="rent" ng-controller="rentController" ng-cloak ng-init="init()">
     <div class="container">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h1 class="panel-title">Places to rent</h1> </div>
-            <table class="table table-bordered">
-                <tr ng-hide="players.length == 0" class="row">
-                    <td>Link</td>
-                    <td>Location</td>
-                    <td>Price Per Calendar Month</td>
-                    <td>Notes</td>
-                    <td>Remove</td>
-                    <td>Update</td>
-                </tr>
-                <tr class="row" ng-repeat="place in places">
-                    <td>
-                        <input class="form-control input-lg" type="url" ng-bind="place.link" ng-model="place.link"> </td>
-                    <td>
-                        <input class="form-control input-lg" type="text" ng-bind="place.location" ng-model="place.location"> </td>
-                    <td>
-                        <input class="form-control input-lg" type="number" ng-bind="place.pricePerMonth" ng-model="place.pricePerMonth"> </td>
-                    <td>
-                        <input class="form-control input-lg" type="text" ng-bind="place.notes" ng-model="place.notes"> </td>
-                    <td>
-                        <button class="btn btn-lg btn-danger" ng-click="removePlace($index)">X</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-lg btn-success" ng-click="updatePlaces()"><i class="ion-checkmark"></i></button>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <form name="placesForm" ng-submit="placesForm.$valid && addPlace(link,location,pricePerWeek,pricePerMonth,notes)">
-                    <div class="form-group">
-                        <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Link to Website" ng-model="link">
-                        <input type="text" name="location" required class="form-control input-lg" ng-minlength="1" placeholder="Location" ng-model="location">
-                        <input type="number" step="0.01" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="pricePerWeek">
-                        <input type="number" step="0.01" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="pricePerMonth">
-                        <input type="text" name="notes" class="form-control input-lg" placeholder="Notes" ng-model="notes"> </div>
-                    <button type="submit" class="btn btn-lg btn-primary">Add</button>
-                </form>
-                <form name="locationForm" ng-submit="locationForm.$valid && addLocation(name,description,latitude,longitude)">
-                    <div class="form-group">
-                        <input type="text" name="name" required class="form-control input-lg" placeholder="Location Name" ng-model="name">
-                        <input type="text" name="description" required class="form-control input-lg" placeholder="Location Description" ng-model="description">
-                        <input type="text" name="latitude" disabled placeholder="latitude" ng-model="latitude">
-                        <input type="text" name="longitude" disabled class="disabled" placeholder="longitude" ng-model="longitude"> </div>
-                    <button class="btn btn-lg btn-info" ng-click="lookupLocation()">Lookup Location</button>
-                    <button type="submit" class="btn btn-lg btn-primary">Add</button>
-                </form>
-                <ul ng-repeat="loc in locations">
-                    <li>{{loc.description}}</li>
-                </ul>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header"> <a class="navbar-brand" href="#/">Property Rent Comparer</a> </div>
+                <div id="navbar" class="nav navbar-left">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" ng-class="{active : activeMenu === 'my-properties'}"><a href="#/" ng-click="activeMenu = 'my-properties'">My Properties</a> </li>
+                        <li role="presentation" ng-class="{active : activeMenu === 'add-property'}"><a href="#add-property" ng-click="activeMenu = 'add-property'">Add property</a> </li>
+                        <li role="presentation" ng-class="{active : activeMenu === 'add-location'}"><a href="#add-location" ng-click="activeMenu = 'add-location'">Add location</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <button class="btn btn-warning" ng-click="clearAll()">Clear Data</button>
+        </nav>
+        <div ng-view></div>
     </div>
 </body>
 

@@ -1,0 +1,19 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">Add a property</h1> </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <form name="placesForm" ng-submit="placesForm.$valid && addPlace(link,location,pricePerWeek,pricePerMonth,notes)">
+                    <div class="form-group">
+                        <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Link to Website" ng-model="link">
+                        <input type="text" name="location" required class="form-control input-lg" ng-minlength="1" placeholder="Location" ng-model="location">
+                        <input type="number" step="0.01" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="pricePerWeek">
+                        <input type="number" step="0.01" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="pricePerMonth">
+                        <input type="text" name="notes" class="form-control input-lg" placeholder="Notes" ng-model="notes"> </div>
+                    <button type="submit" class="btn btn-lg btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
