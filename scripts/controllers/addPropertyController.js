@@ -12,10 +12,7 @@ app.controller('addPropertyController', ['$scope', '$rootScope', function ($scop
         $rootScope.places = $scope.places.concat(newPlace);
         $scope.updatePlaces();
     };
-    $scope.removePlace = function ($index) {
-        $rootScope.places.splice($index, 1);
-        $scope.updatePlaces();
-    };
+
     $scope.change = function (whichField) {
         if (whichField === 'perweek') {
             $scope.pricePerMonth = (($scope.pricePerWeek * 52) / 12);
