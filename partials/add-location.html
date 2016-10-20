@@ -11,7 +11,7 @@
                         <input type="text" name="description" required class="form-control input-lg" placeholder="Address e.g. Baker Street" ng-model="address">
                         <input type="text" name="latitude" disabled placeholder="latitude" ng-model="latitude">
                         <input type="text" name="longitude" disabled placeholder="longitude" ng-model="longitude"> </div>
-                    <button class="btn btn-lg btn-info" ng-click="lookupLocation()">Lookup Location</button>
+                    <button type="button" class="btn btn-lg btn-info" ng-click="lookupLocation()">Lookup Location</button>
                     <button type="submit" class="btn btn-lg btn-primary">Add</button>
                 </form>
                 <ul ng-repeat="loc in locations">
