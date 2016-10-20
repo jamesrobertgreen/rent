@@ -1,10 +1,10 @@
 app.controller('addLocationController', ['$scope', '$rootScope', function ($scope, $rootScope) {
-    $scope.addLocation = function (name, description, latitude, longitude) {
+    $scope.addLocation = function (name, address, latitude, longitude) {
         var newLocation = {
             "name": name
-            , "description": description
-            , "latitude": ""
-            , "longitude": ""
+            , "address": address
+            , "latitude": "latitude"
+            , "longitude": "longitude"
         };
         $rootScope.locations = $scope.locations.concat(newLocation);
         $rootScope.updateLocations();

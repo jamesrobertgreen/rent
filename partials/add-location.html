@@ -4,17 +4,18 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
-                <form name="locationForm" ng-submit="locationForm.$valid && addLocation(name,description,latitude,longitude)">
+                <p>Add a location so that you can easily compare the distance from your properties to work or another location.</p>
+                <form name="locationForm" ng-submit="locationForm.$valid && addLocation(name,address,latitude,longitude)">
                     <div class="form-group">
-                        <input type="text" name="name" required class="form-control input-lg" placeholder="Location Name" ng-model="name">
-                        <input type="text" name="description" required class="form-control input-lg" placeholder="Location Description" ng-model="description">
+                        <input type="text" name="name" required class="form-control input-lg" placeholder="Name e.g. Work" ng-model="name">
+                        <input type="text" name="description" required class="form-control input-lg" placeholder="Address e.g. Baker Street" ng-model="address">
                         <input type="text" name="latitude" disabled placeholder="latitude" ng-model="latitude">
-                        <input type="text" name="longitude" disabled class="disabled" placeholder="longitude" ng-model="longitude"> </div>
+                        <input type="text" name="longitude" disabled placeholder="longitude" ng-model="longitude"> </div>
                     <button class="btn btn-lg btn-info" ng-click="lookupLocation()">Lookup Location</button>
                     <button type="submit" class="btn btn-lg btn-primary">Add</button>
                 </form>
                 <ul ng-repeat="loc in locations">
-                    <li>{{loc.description}}</li>
+                    <li>{{loc.name}}</li>
                 </ul>
             </div>
         </div>
