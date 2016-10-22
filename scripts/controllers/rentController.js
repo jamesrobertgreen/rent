@@ -20,8 +20,6 @@ app.controller('rentController', ['$scope', '$rootScope','$location', function (
         }
     };
     $rootScope.clearAll = function () {
-        $location.path('/add-property');
-        $rootScope.$apply();
         $rootScope.places = [];
         $rootScope.locations = [];
         $rootScope.updatePlaces();

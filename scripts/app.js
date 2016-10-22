@@ -1,4 +1,4 @@
-var app = angular.module('rent', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+var app = angular.module('rent', ['ngRoute', 'ngMap', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {
         templateUrl: 'partials/show-properties.html'

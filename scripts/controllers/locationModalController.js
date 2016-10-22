@@ -1,127 +1,82 @@
+app.controller('locationModalController', function ($scope, $modal, $log) {
+    $scope.geopos = {
+        lat: 51.523164
+        , lng: -0.15687704
+        , address: ""
+    };
+    $scope.selected = {
+        lat: 0
+        , lng: 0
+        , address: ""
+    };
+    $scope.open = function (size) {
+        var modalInstance = $modal.open({
+            templateUrl: 'modal-template.html'
+            , controller: 'ModalInstanceCtrl'
+            , size: size
+            , scope: $scope
+            , resolve: {
+                lat: function () {
+                    return $scope.geopos.lat;
+                }
+                , lng: function () {
+                    return $scope.geopos.lng;
+                }
+            }
+        });
+        modalInstance.result.then(function (selectedItem) {}, function () {
 
-app.controller('locationModalController', function ($uibModal, $log, $document) {
-  var $ctrl = this;
-  $ctrl.items = ['item1', 'item2', 'item3'];
-
-  $ctrl.animationsEnabled = true;
-
-  $ctrl.open = function (size, parentSelector) {
-    var parentElem = parentSelector ? 
-      angular.element($document[0].querySelector('.panel-body ' + parentSelector)) : undefined;
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      ariaLabelledBy: 'modal-title',
-      ariaDescribedBy: 'modal-body',
-      templateUrl: 'modal-template.html',
-      controller: 'ModalInstanceCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      appendTo: parentElem,
-      resolve: {
-        items: function () {
-          return $ctrl.items;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  $ctrl.openComponentModal = function () {
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      component: 'modalComponent',
-      resolve: {
-        items: function () {
-          return $ctrl.items;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
-    }, function () {
-      $log.info('modal-component dismissed at: ' + new Date());
-    });
-  };
-
-  $ctrl.openMultipleModals = function () {
-    $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      ariaLabelledBy: 'modal-title-bottom',
-      ariaDescribedBy: 'modal-body-bottom',
-      templateUrl: 'stackedModal.html',
-      size: 'sm',
-      controller: function($scope) {
-        $scope.name = 'bottom';  
-      }
-    });
-
-    $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      ariaLabelledBy: 'modal-title-top',
-      ariaDescribedBy: 'modal-body-top',
-      templateUrl: 'stackedModal.html',
-      size: 'sm',
-      controller: function($scope) {
-        $scope.name = 'top';  
-      }
-    });
-  };
-
-  $ctrl.toggleAnimation = function () {
-    $ctrl.animationsEnabled = !$ctrl.animationsEnabled;
-  };
+        });
+    };
 });
-
-// Please note that $uibModalInstance represents a modal window (instance) dependency.
-// It is not the same as the $uibModal service used above.
-
-app.controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
-  var $ctrl = this;
-  $ctrl.items = items;
-  $ctrl.selected = {
-    item: $ctrl.items[0]
-  };
-
-  $ctrl.ok = function () {
-    $uibModalInstance.close($ctrl.selected.item);
-  };
-
-  $ctrl.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-});
-
-// Please note that the close and dismiss bindings are from $uibModalInstance.
-
-app.component('modalComponent', {
-  templateUrl: 'modal-template.html',
-  bindings: {
-    resolve: '<',
-    close: '&',
-    dismiss: '&'
-  },
-  controller: function () {
-    var $ctrl = this;
-
-    $ctrl.$onInit = function () {
-      $ctrl.items = $ctrl.resolve.items;
-      $ctrl.selected = {
-        item: $ctrl.items[0]
-      };
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, lat, lng) {
+    $scope.geopos.lat = lat;
+    $scope.geopos.lng = lng;
+    $scope.render = true;
+    $scope.validation_text = "";
+    $scope.$on('mapInitialized', function (evt, evtMap) {
+        $scope.map = evtMap;
+        $scope.marker = new google.maps.Marker({
+            position: evt.latLng
+            , map: $scope.map
+        });
+        $scope.click = function (evt) {
+            var latitude = evt.latLng.lat().toPrecision(8);
+            var longitude = evt.latLng.lng().toPrecision(8);
+            $scope.validation_text = "";
+            $scope.marker.setPosition(evt.latLng);
+            $scope.map.panTo(evt.latLng);
+            $scope.map.setZoom(10);
+            $scope.geopos.lat = latitude;
+            $scope.geopos.lng = longitude;
+            var geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(evt.latLng.lat(), evt.latLng.lng());
+            geocoder.geocode({
+                'latLng': latlng
+            }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        $scope.geopos.address = results[1].formatted_address;
+                    }
+                    else {
+                        console.log('Location not found');
+                    }
+                }
+                else {
+                    console.log('Geocoder failed due to: ' + status);
+                }
+            });
+        }
+    });
+    $scope.ok = function () {
+        $scope.selected.lat = $scope.geopos.lat;
+        $scope.selected.lng = $scope.geopos.lng;
+        $scope.selected.address = $scope.geopos.address;
+        $modalInstance.close();
     };
-
-    $ctrl.ok = function () {
-      $ctrl.close({$value: $ctrl.selected.item});
+    $scope.cancel = function () {
+        $modalInstance.close();
     };
-
-    $ctrl.cancel = function () {
-      $ctrl.dismiss({$value: 'cancel'});
-    };
-  }
 });

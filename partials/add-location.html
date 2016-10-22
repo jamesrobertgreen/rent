@@ -4,23 +4,22 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
-                <p>Add a location so that you can easily compare the distance from your properties to work or another location.</p>
-                <form name="locationForm" ng-submit="locationForm.$valid && addLocation(name,address,latitude,longitude)">
-                    <div class="form-group">
-                        <input type="text" name="name" required class="form-control input-lg" placeholder="Name e.g. Work" ng-model="name">
-                        <input type="text" name="description" required class="form-control input-lg" placeholder="Address e.g. Baker Street" ng-model="address">
-                        <input type="text" name="latitude" disabled placeholder="latitude" ng-model="latitude">
-                        <input type="text" name="longitude" disabled placeholder="longitude" ng-model="longitude"> </div>
-                    <div ng-controller="locationModalController as $ctrl">
+                <div ng-controller="locationModalController">
+                    <p>Add a location so that you can easily compare the distance from your properties to work or another location.</p>
+                    <form name="locationForm" ng-submit="locationForm.$valid && addLocation(name,selected.address,selected.lat,selected.lng)">
+                        <div class="form-group">
+                            <input type="text" name="name" required class="form-control input-lg" placeholder="Name e.g. Work" ng-model="name">
+                            <button type="button" class="btn btn-lg btn-info" ng-click="open('lg')">Lookup Location</button>
+                            <input type="text" name="description" disabled required class="form-control input-lg" placeholder="Address e.g. Baker Street" ng-model="selected.address">
+                            <input type="text" name="latitude" disabled required class="form-control input-lg" placeholder="latitude" ng-model="selected.lat">
+                            <input type="text" name="longitude" disabled required class="form-control input-lg" placeholder="longitude" ng-model="selected.lng"> </div>
                         <div ng-include="'partials/modal-template.html'"></div>
-                        <button type="button" class="btn btn-lg btn-info" ng-click="$ctrl.open()">Lookup Location</button>
-                        {{$ctrl.selected}}
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-primary">Add</button>
-                </form>
-                <ul ng-repeat="loc in locations">
-                    <li>{{loc.name}}</li>
-                </ul>
+                        <button type="submit" class="btn btn-lg btn-primary">Add</button>
+                    </form>
+                    <ul ng-repeat="loc in locations">
+                        <li>{{loc.name}},{{loc.address}},{{loc.latitude}},{{loc.longitude}}</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
