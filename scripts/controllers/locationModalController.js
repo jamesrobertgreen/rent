@@ -24,9 +24,7 @@ app.controller('locationModalController', function ($scope, $modal, $log) {
                 }
             }
         });
-        modalInstance.result.then(function (selectedItem) {}, function () {
-
-        });
+        modalInstance.result.then(function (selectedItem) {}, function () {});
     };
 });
 // Please note that $modalInstance represents a modal window (instance) dependency.
@@ -36,6 +34,9 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, lat, lng) 
     $scope.geopos.lng = lng;
     $scope.render = true;
     $scope.validation_text = "";
+    $scope.$on('$routeChangeSuccess', function () {
+        google.maps.event.trigger($scope.map, 'resize');
+    });
     $scope.$on('mapInitialized', function (evt, evtMap) {
         $scope.map = evtMap;
         $scope.marker = new google.maps.Marker({

@@ -3,8 +3,8 @@ app.controller('rentController', ['$scope', '$rootScope','$location', function (
         var tmpPlaces = localStorage.getItem("places");
         if (tmpPlaces === '' || tmpPlaces === undefined || tmpPlaces === null || tmpPlaces === '[]') {
             $rootScope.places = [];
-            $rootScope.activeMenu = 'add-location';
-            $location.path('/add-location');
+            $rootScope.activeMenu = 'add-property';
+            $location.path('/add-property');
         }
         else {
             $rootScope.places = JSON.parse(tmpPlaces);
