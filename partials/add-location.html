@@ -11,7 +11,11 @@
                         <input type="text" name="description" required class="form-control input-lg" placeholder="Address e.g. Baker Street" ng-model="address">
                         <input type="text" name="latitude" disabled placeholder="latitude" ng-model="latitude">
                         <input type="text" name="longitude" disabled placeholder="longitude" ng-model="longitude"> </div>
-                    <button type="button" class="btn btn-lg btn-info" ng-click="lookupLocation()">Lookup Location</button>
+                    <div ng-controller="locationModalController as $ctrl">
+                        <div ng-include="'partials/modal-template.html'"></div>
+                        <button type="button" class="btn btn-lg btn-info" ng-click="$ctrl.open()">Lookup Location</button>
+                        {{$ctrl.selected}}
+                    </div>
                     <button type="submit" class="btn btn-lg btn-primary">Add</button>
                 </form>
                 <ul ng-repeat="loc in locations">

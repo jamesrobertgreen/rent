@@ -4,13 +4,23 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
+                <div ng-if="!locations.length">
+                    <ul ng-repeat="alocation in locations">
+                        <li>{{alocation.name}} - {{alocation.Address}}</li>
+                    </ul>
+                </div>
                 <div ng-hide="places.length===0">
                     <table class="table table-bordered">
                         <tr class="row">
                             <td>Link</td>
                             <td>Location</td>
                             <td>Price Per Calendar Month</td>
-                            <td>Notes</td>
+                            <td>Notes{{locations.length}}</td>
+                            <div ng-if="!locations.length">
+                                <div ng-repeat="alocation in locations">
+                                    <td>{{alocation.name}} - {{alocation.Address}}</td>
+                                </div>
+                            </div>
                             <td>Remove</td>
                             <td>Update</td>
                         </tr>
@@ -23,6 +33,11 @@
                                 <input class="form-control input-lg" type="number" ng-bind="place.pricePerMonth" ng-model="place.pricePerMonth"> </td>
                             <td>
                                 <input class="form-control input-lg" type="text" ng-bind="place.notes" ng-model="place.notes"> </td>
+                            <div ng-hide="!locations.length">
+                                <div ng-repeat="alocation in locations">
+                                    <td>{{alocation.latitude}}</td>
+                                </div>
+                            </div>
                             <td>
                                 <button class="btn btn-lg btn-danger" ng-click="removePlace($index)">X</button>
                             </td>
@@ -34,7 +49,8 @@
                     <button class="btn btn-warning" ng-click="clearAll()">Clear All Data</button>
                 </div>
                 <div ng-show="places.length===0">
-                <p>Please add a property on the "Add property" tab.</p></div>
+                    <p>Please add a property on the "Add property" tab.</p>
+                </div>
             </div>
         </div>
     </div>
