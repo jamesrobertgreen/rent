@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h1 class="panel-title">Places to rent</h1> </div>
+        <h1 class="panel-title">properties to rent</h1> </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
@@ -9,7 +9,7 @@
                         <li>{{alocation.name}} - {{alocation.Address}}</li>
                     </ul>
                 </div>
-                <div ng-hide="places.length===0">
+                <div ng-hide="properties.length===0">
                     <table class="table table-bordered">
                         <tr class="row">
                             <td>Link</td>
@@ -24,31 +24,31 @@
                             <td>Remove</td>
                             <td>Update</td>
                         </tr>
-                        <tr class="row" ng-repeat="place in places">
+                        <tr class="row" ng-repeat="property in properties">
                             <td>
-                                <input class="form-control input-lg" type="url" ng-bind="place.link" ng-model="place.link"> </td>
+                                <input class="form-control input-lg" type="url" ng-bind="property.link" ng-model="property.link"> </td>
                             <td>
-                                <input class="form-control input-lg" type="text" ng-bind="place.location" ng-model="place.location"> </td>
+                                <input class="form-control input-lg" type="text" ng-bind="property.location" ng-model="property.location"> </td>
                             <td>
-                                <input class="form-control input-lg" type="number" ng-bind="place.pricePerMonth" ng-model="place.pricePerMonth"> </td>
+                                <input class="form-control input-lg" type="number" ng-bind="property.pricePerMonth" ng-model="property.pricePerMonth"> </td>
                             <td>
-                                <input class="form-control input-lg" type="text" ng-bind="place.notes" ng-model="place.notes"> </td>
+                                <input class="form-control input-lg" type="text" ng-bind="property.notes" ng-model="property.notes"> </td>
                             <div ng-hide="!locations.length">
                                 <div ng-repeat="alocation in locations">
                                     <td>{{alocation.latitude}}</td>
                                 </div>
                             </div>
                             <td>
-                                <button class="btn btn-lg btn-danger" ng-click="removePlace($index)">X</button>
+                                <button class="btn btn-lg btn-danger" ng-click="removeproperty($index)">X</button>
                             </td>
                             <td>
-                                <button class="btn btn-lg btn-success" ng-click="updatePlaces()"><i class="ion-checkmark"></i></button>
+                                <button class="btn btn-lg btn-success" ng-click="updateproperties()"><i class="ion-checkmark"></i></button>
                             </td>
                         </tr>
                     </table>
                     <button class="btn btn-warning" ng-click="clearAll()">Clear All Data</button>
                 </div>
-                <div ng-show="places.length===0">
+                <div ng-show="properties.length===0">
                     <p>Please add a property on the "Add property" tab.</p>
                 </div>
             </div>

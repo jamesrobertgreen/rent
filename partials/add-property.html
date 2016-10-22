@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <div ng-controller="locationModalController">
                     <p>Add a property that you are interested in below</p>
-                    <form name="placesForm" ng-submit="placesForm.$valid && addPlace(link,selected.address,selected.lng,selected.lat,$parent.pricePerWeek,$parent.pricePerMonth,notes)">
+                    <form name="propertiesForm" ng-submit="propertiesForm.$valid && addProperty(link,selected.address,selected.lng,selected.lat,$parent.pricePerWeek,$parent.pricePerMonth,notes)">
                         <div class="form-group">
                             <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Website where you saw the property" ng-model="link">
                             <div class="form-group">

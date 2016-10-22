@@ -1,7 +1,6 @@
 app.controller('addPropertyController', ['$scope', '$rootScope', function ($scope, $rootScope) {
-
-    $scope.addPlace = function (link, location, longitude,latitude,pricePerWeek, pricePerMonth, notes) {
-        var newPlace = {
+    $scope.addProperty = function (link, location, longitude, latitude, pricePerWeek, pricePerMonth, notes) {
+        var newProperty = {
             "link": link
             , "location": location
             , "longitude": longitude
@@ -10,10 +9,10 @@ app.controller('addPropertyController', ['$scope', '$rootScope', function ($scop
             , "pricePerMonth": pricePerMonth
             , "notes": notes
         };
-        $rootScope.places = $scope.places.concat(newPlace);
-        $scope.updatePlaces();
+        $rootScope.properties = $scope.properties.concat(newProperty);
+        $rootScope.updateProperties();
+        window.alert("Added!");
     };
-
     $scope.change = function (whichField) {
         if (whichField === 'perweek') {
             $scope.pricePerMonth = (($scope.pricePerWeek * 52) / 12);

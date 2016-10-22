@@ -8,6 +8,7 @@ app.controller('addLocationController', ['$scope', '$rootScope', function ($scop
         };
         $rootScope.locations = $scope.locations.concat(newLocation);
         $rootScope.updateLocations();
+        window.alert("Added!");
     };
     $scope.removeLocation = function ($index) {
         $rootScope.locations.splice($index, 1);

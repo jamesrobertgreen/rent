@@ -1,13 +1,13 @@
 app.controller('rentController', ['$scope', '$rootScope','$location', function ($scope, $rootScope, $location) {
     $scope.init = function () {
-        var tmpPlaces = localStorage.getItem("places");
-        if (tmpPlaces === '' || tmpPlaces === undefined || tmpPlaces === null || tmpPlaces === '[]') {
-            $rootScope.places = [];
+        var tmpProperties = localStorage.getItem("properties");
+        if (tmpProperties === '' || tmpProperties === undefined || tmpProperties === null || tmpProperties === '[]') {
+            $rootScope.properties = [];
             $rootScope.activeMenu = 'add-property';
             $location.path('/add-property');
         }
         else {
-            $rootScope.places = JSON.parse(tmpPlaces);
+            $rootScope.properties = JSON.parse(tmpProperties);
             $rootScope.activeMenu = 'my-properties';
             $location.path('/');
         }
@@ -20,19 +20,19 @@ app.controller('rentController', ['$scope', '$rootScope','$location', function (
         }
     };
     $rootScope.clearAll = function () {
-        $rootScope.places = [];
+        $rootScope.properties = [];
         $rootScope.locations = [];
-        $rootScope.updatePlaces();
+        $rootScope.updateProperties();
         $rootScope.updateLocations();
     };
-    $rootScope.updatePlaces = function () {
-        localStorage.setItem("places", JSON.stringify($rootScope.places));
+    $rootScope.updateProperties = function () {
+        localStorage.setItem("properties", JSON.stringify($rootScope.properties));
     };
     $rootScope.updateLocations = function () {
         localStorage.setItem("locations", JSON.stringify($rootScope.locations));
     };
-    $scope.removePlace = function ($index) {
-        $rootScope.places.splice($index, 1);
-        $rootScope.updatePlaces();
+    $scope.removeProperty = function ($index) {
+        $rootScope.properties.splice($index, 1);
+        $rootScope.updateProperties();
     };
 }]);
