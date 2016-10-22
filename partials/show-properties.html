@@ -4,25 +4,17 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <div ng-if="!locations.length">
-                    <ul ng-repeat="alocation in locations">
-                        <li>{{alocation.name}} - {{alocation.Address}}</li>
-                    </ul>
-                </div>
+                {{locations}}
                 <div ng-hide="properties.length===0">
                     <table class="table table-bordered">
                         <tr class="row">
-                            <td>Link</td>
-                            <td>Location</td>
-                            <td>Price Per Calendar Month</td>
-                            <td>Notes{{locations.length}}</td>
-                            <div ng-if="!locations.length">
-                                <div ng-repeat="alocation in locations">
-                                    <td>{{alocation.name}} - {{alocation.Address}}</td>
-                                </div>
-                            </div>
-                            <td>Remove</td>
-                            <td>Update</td>
+                            <th>Link</th>
+                            <th>Location</th>
+                            <th>Price Per Calendar Month</th>
+                            <th>Notes</th>
+                            <th ng-repeat="loc in locations"> {{loc.name}} </th>
+                            <th>Remove</th>
+                            <th>Update</th>
                         </tr>
                         <tr class="row" ng-repeat="property in properties">
                             <td>
@@ -33,11 +25,7 @@
                                 <input class="form-control input-lg" type="number" ng-bind="property.pricePerMonth" ng-model="property.pricePerMonth"> </td>
                             <td>
                                 <input class="form-control input-lg" type="text" ng-bind="property.notes" ng-model="property.notes"> </td>
-                            <div ng-hide="!locations.length">
-                                <div ng-repeat="alocation in locations">
-                                    <td>{{alocation.latitude}}</td>
-                                </div>
-                            </div>
+                            <td ng-repeat="alocation in locations"> {{alocation.latitude}} </td>
                             <td>
                                 <button class="btn btn-lg btn-danger" ng-click="removeproperty($index)">X</button>
                             </td>
