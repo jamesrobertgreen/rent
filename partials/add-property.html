@@ -4,21 +4,23 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
-                <p>Add a property that you are interested in below</p>
-                <form name="placesForm" ng-submit="placesForm.$valid && addPlace(link,address,longitude,latitude,pricePerWeek,pricePerMonth,notes)">
-                    <div class="form-group">
-                        <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Website where you saw the property" ng-model="link">
+                <div ng-controller="locationModalController">
+                    <p>Add a property that you are interested in below</p>
+                    <form name="placesForm" ng-submit="placesForm.$valid && addPlace(link,selected.address,selected.lng,selected.lat,pricePerWeek,pricePerMonth,notes)">
                         <div class="form-group">
-                            <button type="button" class="btn btn-lg btn-info" ng-click="lookupLocation()">Lookup Location</button>
-                            <input type="text" name="address" disabled placeholder="address" ng-model="address">
-                            <!--input type="text" required name="latitude" disabled placeholder="latitude" ng-model="latitude">
-                            <input type="text" required name="longitude" disabled class="disabled" placeholder="longitude" ng-model="longitude"-->
-                        </div>
-                        <input type="number" step="0.01" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="pricePerWeek">
-                        <input type="number" step="0.01" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="pricePerMonth">
-                        <input type="text" name="notes" class="form-control input-lg" placeholder="Notes" ng-model="notes"> </div>
-                    <button type="submit" class="btn btn-lg btn-primary">Add</button>
-                </form>
+                            <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Website where you saw the property" ng-model="link">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-lg btn-info" ng-click="open('lg')">Lookup Location</button>
+                                <div ng-include="'partials/modal-template.html'"></div>
+                                <input type="text" name="address" required disabled class="form-control input-lg" placeholder="Address" ng-model="selected.address">
+                                <input type="text" required name="latitude" disabled class="form-control input-lg" placeholder="latitude" ng-model="selected.lat">
+                                <input type="text" required name="longitude" disabled class="form-control input-lg" placeholder="longitude" ng-model="selected.lng"> </div>
+                            <input type="number" step="0.01" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="pricePerWeek">
+                            <input type="number" step="0.01" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="pricePerMonth">
+                            <input type="text" name="notes" class="form-control input-lg" placeholder="Notes" ng-model="notes"> </div>
+                        <button type="submit" class="btn btn-lg btn-primary">Add</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
