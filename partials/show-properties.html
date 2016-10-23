@@ -25,7 +25,7 @@
                                 <input class="form-control input-lg" type="number" ng-bind="property.pricePerMonth" ng-model="property.pricePerMonth"> </td>
                             <td>
                                 <input class="form-control input-lg" type="text" ng-bind="property.notes" ng-model="property.notes"> </td>
-                            <td ng-repeat="alocation in locations"> {{alocation.latitude}} </td>
+                            <td ng-repeat="alocation in locations">{{alocation.latitude}} </td>
                             <td>
                                 <button class="btn btn-lg btn-danger" ng-click="removeproperty($index)">X</button>
                             </td>
