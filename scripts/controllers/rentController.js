@@ -12,7 +12,7 @@ app.controller('rentController', ['$scope', '$rootScope','$location', function (
             $location.path('/');
         }
         var tmpLocations = localStorage.getItem("locations");
-        if (tmpLocations === '' || tmpLocations === undefined || tmpLocations === null) {
+        if (tmpLocations === '' || tmpLocations === undefined || tmpLocations === null || tmpLocations === '[]') {
             $rootScope.locations = [];
         }
         else {
@@ -22,6 +22,7 @@ app.controller('rentController', ['$scope', '$rootScope','$location', function (
     $rootScope.clearAll = function () {
         $rootScope.properties = [];
         $rootScope.locations = [];
+        $scope.locations = [];
         $rootScope.updateProperties();
         $rootScope.updateLocations();
     };

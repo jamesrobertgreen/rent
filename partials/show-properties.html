@@ -3,8 +3,7 @@
         <h1 class="panel-title">properties to rent</h1> </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-12">
-                {{locations}}
+            <div class="col-md-12"> 
                 <div ng-hide="properties.length===0">
                     <table class="table table-bordered">
                         <tr class="row">
@@ -12,7 +11,7 @@
                             <th>Location</th>
                             <th>Price Per Calendar Month</th>
                             <th>Notes</th>
-                            <th ng-repeat="loc in locations"> {{loc.name}} </th>
+                            <th ng-repeat="loc in locations"> {{loc.name}}: {{loc.address}} </th>
                             <th>Remove</th>
                             <th>Update</th>
                         </tr>
@@ -25,12 +24,12 @@
                                 <input class="form-control input-lg" type="number" ng-bind="property.pricePerMonth" ng-model="property.pricePerMonth"> </td>
                             <td>
                                 <input class="form-control input-lg" type="text" ng-bind="property.notes" ng-model="property.notes"> </td>
-                            <td ng-repeat="alocation in locations">{{alocation.latitude}} </td>
+                            <td ng-repeat="loc in property.locations">{{loc.distance}} miles</td>
                             <td>
-                                <button class="btn btn-lg btn-danger" ng-click="removeproperty($index)">X</button>
+                                <button class="btn btn-lg btn-danger" ng-click="removeProperty($index)">X</button>
                             </td>
                             <td>
-                                <button class="btn btn-lg btn-success" ng-click="updateproperties()"><i class="ion-checkmark"></i></button>
+                                <button class="btn btn-lg btn-success" ng-click="updateProperties()"><i class="ion-checkmark"></i></button>
                             </td>
                         </tr>
                     </table>

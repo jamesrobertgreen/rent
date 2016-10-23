@@ -1,13 +1,15 @@
 app.controller('addPropertyController', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.addProperty = function (link, location, longitude, latitude, pricePerWeek, pricePerMonth, notes) {
         var newProperty = {
-            "link": link
+            "id": $rootScope.properties.length
+            , "link": link
             , "location": location
             , "longitude": longitude
             , "latitude": latitude
             , "pricePerWeek": pricePerWeek
             , "pricePerMonth": pricePerMonth
             , "notes": notes
+            , "locations": []
         };
         $rootScope.properties = $scope.properties.concat(newProperty);
         $rootScope.updateProperties();
