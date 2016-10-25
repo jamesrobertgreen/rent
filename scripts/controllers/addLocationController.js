@@ -1,8 +1,11 @@
 app.controller('addLocationController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+    var self = this;
+    var currentProperty;
     $scope.addLocation = function (name, address, latitude, longitude) {
         $scope.locationName = name;
         var newLocation = {
-            "name": name
+            "id": $rootScope.locations.length
+            , "name": name
             , "address": address
             , "latitude": latitude
             , "longitude": longitude
@@ -18,13 +21,10 @@ app.controller('addLocationController', ['$scope', '$rootScope', function ($scop
     };
     var calcDistanceBetweenProperties = function (lat, long) {
         angular.forEach($rootScope.properties, function (property) {
-            $scope.currentProperty = property;
-            console.log("Property - " + property.link);
-            $scope.calcDistance(property.latitude, property.longitude, lat, long);
+            $scope.calcDistance(property, property.latitude, property.longitude, lat, long);
         });
     };
-    $scope.calcDistance = function (propertyLat, propertyLng, locationLat, locationLng) {
-        console.log("property in calcdistance = " + $scope.currentProperty);
+    $scope.calcDistance = function (currentProperty, propertyLat, propertyLng, locationLat, locationLng) {
         var origin = new google.maps.LatLng(propertyLat, propertyLng);
         var destination = new google.maps.LatLng(locationLat, locationLng);
         var service = new google.maps.DistanceMatrixService();
@@ -35,35 +35,34 @@ app.controller('addLocationController', ['$scope', '$rootScope', function ($scop
             , unitSystem: google.maps.UnitSystem.IMPERIAL
             , avoidHighways: false
             , avoidTolls: false
-        }, callback);
+        }, callback(currentProperty));
     }
-    var callback = function (response, status) {
-        console.log("property in callback = " + $scope.currentProperty);
-        if (status != google.maps.DistanceMatrixStatus.OK) {
-            $scope.distanceText = err;
-        }
-        else {
-            var origin = response.originAddresses[0];
-            var destination = response.destinationAddresses[0];
-            if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
-                $scope.distanceText = "There are no roads between " + origin + " and " + destination;
+    var callback = function (currentProperty) {
+        return function (response, status) {
+            if (status != google.maps.DistanceMatrixStatus.OK) {
+                $scope.distanceText = err;
             }
             else {
-                var distance = response.rows[0].elements[0].distance;
-                var distance_value = distance.value;
-                var distance_text = distance.text;
-                var miles = distance_text.substring(0, distance_text.length - 3);
-                $scope.distanceText = "It is " + miles + " miles from " + origin + " to " + destination;
-                console.log("property before = " + $scope.currentProperty);
-                var newDistance = {
-                    "name":$scope.locationName,
-                    "distance": miles
-                };
-                $scope.currentProperty.locations.push(newDistance);
-                console.log("property after = " + $scope.currentProperty);
-                $rootScope.updateProperties();
+                var origin = response.originAddresses[0];
+                var destination = response.destinationAddresses[0];
+                if (response.rows[0].elements[0].status === "ZERO_RESULTS") {
+                    //$scope.distanceText = "There are no roads between " + origin + " and " + destination;
+                }
+                else {
+                    var distance = response.rows[0].elements[0].distance;
+                    var distance_value = distance.value;
+                    var distance_text = distance.text;
+                    var miles = distance_text.substring(0, distance_text.length - 3);
+                    //$scope.distanceText = "It is " + miles + " miles from " + origin + " to " + destination;
+                    var newDistance = {
+                        "name": $scope.locationName
+                        , "distance": miles
+                    };
+                    currentProperty.locations.push(newDistance);
+                    $rootScope.updateProperties();
+                }
+                //console.log($scope.distanceText);
             }
-            console.log($scope.distanceText);
-        }
+        };
     }
 }]);
