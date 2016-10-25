@@ -21,10 +21,10 @@ app.controller('addLocationController', ['$scope', '$rootScope', function ($scop
     };
     var calcDistanceBetweenProperties = function (lat, long) {
         angular.forEach($rootScope.properties, function (property) {
-            $scope.calcDistance(property, property.latitude, property.longitude, lat, long);
+            calcDistance(property, property.latitude, property.longitude, lat, long);
         });
     };
-    $scope.calcDistance = function (currentProperty, propertyLat, propertyLng, locationLat, locationLng) {
+    var calcDistance = function (currentProperty, propertyLat, propertyLng, locationLat, locationLng) {
         var origin = new google.maps.LatLng(propertyLat, propertyLng);
         var destination = new google.maps.LatLng(locationLat, locationLng);
         var service = new google.maps.DistanceMatrixService();

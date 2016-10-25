@@ -11,11 +11,11 @@
                             <th>Location</th>
                             <th>Price Per Calendar Month</th>
                             <th>Notes</th>
-                            <th ng-repeat="loc in locations"> {{loc.name}}: {{loc.address}} </th>
+                            <th ng-repeat="loc in locations track by $index"> {{loc.name}}: {{loc.address}} </th>
                             <th>Remove</th>
                             <th>Update</th>
                         </tr>
-                        <tr class="row" ng-repeat="property in properties">
+                        <tr class="row" ng-repeat="property in properties track by $index">
                             <td>
                                 <input class="form-control input-lg" type="url" ng-bind="property.link" ng-model="property.link"> </td>
                             <td>
@@ -24,7 +24,7 @@
                                 <input class="form-control input-lg" type="number" ng-bind="property.pricePerMonth" ng-model="property.pricePerMonth"> </td>
                             <td>
                                 <input class="form-control input-lg" type="text" ng-bind="property.notes" ng-model="property.notes"> </td>
-                            <td ng-repeat="loc in property.locations">{{loc.distance}} miles</td>
+                            <td ng-repeat="loc in property.locations track by $index">{{loc.distance}} miles</td>
                             <td>
                                 <button class="btn btn-lg btn-danger" ng-click="removeProperty($index)">X</button>
                             </td>

@@ -1,4 +1,4 @@
-app.controller('rentController', ['$scope', '$rootScope','$location', function ($scope, $rootScope, $location) {
+app.controller('rentController', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
     $scope.init = function () {
         var tmpProperties = localStorage.getItem("properties");
         if (tmpProperties === '' || tmpProperties === undefined || tmpProperties === null || tmpProperties === '[]') {
@@ -36,4 +36,5 @@ app.controller('rentController', ['$scope', '$rootScope','$location', function (
         $rootScope.properties.splice($index, 1);
         $rootScope.updateProperties();
     };
+
 }]);
