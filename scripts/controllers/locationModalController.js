@@ -34,15 +34,13 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, lat, lng) 
     $scope.geopos.lng = lng;
     $scope.render = true;
     $scope.validation_text = "";
-    $scope.$on('$routeChangeSuccess', function () {
-        google.maps.event.trigger($scope.map, 'resize');
-    });
     $scope.$on('mapInitialized', function (evt, evtMap) {
         $scope.map = evtMap;
         $scope.marker = new google.maps.Marker({
             position: evt.latLng
             , map: $scope.map
         });
+        google.maps.event.trigger($scope.map, 'resize');
         $scope.click = function (evt) {
             var latitude = evt.latLng.lat().toPrecision(8);
             var longitude = evt.latLng.lng().toPrecision(8);
