@@ -1,9 +1,9 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h1 class="panel-title">properties to rent</h1> </div>
+        <h1 class="panel-title">Properties to rent</h1> </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-12"> 
+            <div class="col-md-12">
                 <div ng-hide="properties.length===0">
                     <table class="table table-bordered">
                         <tr class="row">
@@ -11,7 +11,9 @@
                             <th>Location</th>
                             <th>Price Per Calendar Month</th>
                             <th>Notes</th>
-                            <th ng-repeat="loc in locations track by $index"> {{loc.name}}: {{loc.address}} </th>
+                            <th ng-controller="locationController" ng-repeat="loc in locations track by $index"> {{loc.name}}: {{loc.address}}
+                                <button class="btn btn-danger" ng-click="removeLocation($index)">x</button>
+                            </th>
                             <th>Remove</th>
                             <th>Update</th>
                         </tr>
@@ -24,7 +26,7 @@
                                 <input class="form-control input-lg" type="number" ng-bind="property.pricePerMonth" ng-model="property.pricePerMonth"> </td>
                             <td>
                                 <input class="form-control input-lg" type="text" ng-bind="property.notes" ng-model="property.notes"> </td>
-                            <td ng-repeat="loc in property.locations track by $index">{{loc.distance}} miles</td>
+                            <td ng-repeat="loc in property.locations track by $index">{{loc.distance}} miles </td>
                             <td>
                                 <button class="btn btn-lg btn-danger" ng-click="removeProperty($index)">X</button>
                             </td>

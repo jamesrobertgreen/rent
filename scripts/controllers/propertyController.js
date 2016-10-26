@@ -1,4 +1,4 @@
-app.controller('addPropertyController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+app.controller('propertyController', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.addProperty = function (link, location, longitude, latitude, pricePerWeek, pricePerMonth, notes) {
         var newProperty = {
             "id": $rootScope.properties.length
@@ -20,9 +20,10 @@ app.controller('addPropertyController', ['$scope', '$rootScope', function ($scop
         // get the property we just added
         // added a new property add the distance between this and all current locations
         if (propertyAdded) {
-            calcDistanceBetweenLocations(propertyAdded,latitude, longitude);
+            calcDistanceBetweenLocations(propertyAdded, latitude, longitude);
         }
     };
+
     $scope.change = function (whichField) {
         if (whichField === 'perweek') {
             $scope.pricePerMonth = (($scope.pricePerWeek * 52) / 12);
@@ -33,13 +34,13 @@ app.controller('addPropertyController', ['$scope', '$rootScope', function ($scop
             $scope.pricePerWeek = Math.round($scope.pricePerWeek * 100) / 100;
         }
     };
-    var calcDistanceBetweenLocations = function (propertyAdded,lat, long) {
+    var calcDistanceBetweenLocations = function (propertyAdded, lat, long) {
         angular.forEach($rootScope.locations, function (loc) {
             console.log("loc id " + loc.id + "name = " + loc.name);
-            calcDistance(propertyAdded,loc, loc.latitude, loc.longitude, lat, long);
+            calcDistance(propertyAdded, loc, loc.latitude, loc.longitude, lat, long);
         });
     };
-    var calcDistance = function (propertyAdded,currentLoc, locLat, locLng, propertyLat, propertyLng) {
+    var calcDistance = function (propertyAdded, currentLoc, locLat, locLng, propertyLat, propertyLng) {
         var origin = new google.maps.LatLng(locLat, locLng);
         var destination = new google.maps.LatLng(propertyLat, propertyLng);
         var service = new google.maps.DistanceMatrixService();
@@ -50,9 +51,9 @@ app.controller('addPropertyController', ['$scope', '$rootScope', function ($scop
             , unitSystem: google.maps.UnitSystem.IMPERIAL
             , avoidHighways: false
             , avoidTolls: false
-        }, callback(propertyAdded,currentLoc));
+        }, callback(propertyAdded, currentLoc));
     }
-    var callback = function (propertyAdded,currentLoc) {
+    var callback = function (propertyAdded, currentLoc) {
         return function (response, status) {
             if (status != google.maps.DistanceMatrixStatus.OK) {
                 $scope.distanceText = err;
@@ -73,7 +74,7 @@ app.controller('addPropertyController', ['$scope', '$rootScope', function ($scop
                         "name": currentLoc.name
                         , "distance": miles
                     };
-                    propertyAdded.locations.splice(currentLoc.id,0,newDistance);
+                    propertyAdded.locations.splice(currentLoc.id, 0, newDistance);
                     $rootScope.updateProperties();
                 }
                 //console.log($scope.distanceText);

@@ -11,7 +11,7 @@
                             <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Website where you saw the property" ng-model="link">
                             <div class="form-group">
                                 <button type="button" class="btn btn-lg btn-info" ng-click="open('lg')">Lookup Location</button>
-                                <div ng-include="'partials/modal-template.html'"></div>
+                                <div ng-include="'partials/location-modal-template.html'"></div>
                                 <input type="text" name="address" required disabled class="form-control input-lg" placeholder="Address" ng-model="selected.address">
                                 <input type="text" required name="latitude" disabled class="form-control input-lg" placeholder="latitude" ng-model="selected.lat">
                                 <input type="text" required name="longitude" disabled class="form-control input-lg" placeholder="longitude" ng-model="selected.lng"> </div>

@@ -1,4 +1,4 @@
-app.controller('addLocationController', ['$scope', '$rootScope', function ($scope, $rootScope) {
+app.controller('locationController', ['$scope', '$rootScope', function ($scope, $rootScope) {
     var self = this;
     var currentProperty;
     $scope.addLocation = function (name, address, latitude, longitude) {
@@ -16,8 +16,15 @@ app.controller('addLocationController', ['$scope', '$rootScope', function ($scop
         window.alert("Added!");
     };
     $scope.removeLocation = function ($index) {
+        // remove from the locations array
         $rootScope.locations.splice($index, 1);
         $rootScope.updateLocations();
+        // remove references from the properties array
+        angular.forEach($rootScope.properties, function (prop) {
+            prop.locations.splice($index,1);
+        });
+        $rootScope.updateProperties();
+
     };
     var calcDistanceBetweenProperties = function (lat, long) {
         angular.forEach($rootScope.properties, function (property) {

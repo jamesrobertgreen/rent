@@ -5,10 +5,10 @@ app.config(function ($routeProvider) {
         , controller: 'rentController'
     }).when('/add-location', {
         templateUrl: 'partials/add-location.html'
-        , controller: 'addLocationController'
+        , controller: 'locationController'
     }).when('/add-property', {
         templateUrl: 'partials/add-property.html'
-        , controller: 'addPropertyController'
+        , controller: 'propertyController'
     }).otherwise({
         redirectTo: '/'
     });

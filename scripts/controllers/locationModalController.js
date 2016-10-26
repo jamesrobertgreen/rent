@@ -11,7 +11,7 @@ app.controller('locationModalController', function ($scope, $modal, $log) {
     };
     $scope.open = function (size) {
         var modalInstance = $modal.open({
-            templateUrl: 'modal-template.html'
+            templateUrl: 'location-modal-template.html'
             , controller: 'ModalInstanceCtrl'
             , size: size
             , scope: $scope
