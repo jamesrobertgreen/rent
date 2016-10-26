@@ -17,11 +17,12 @@
                             <th>Remove</th>
                             <th>Update</th>
                         </tr>
-                        <tr class="row" ng-repeat="property in properties track by $index">
+                        <div ng-include="'partials/view-location-modal-template.html'"></div>
+                        <tr class="row" ng-controller="locationModalController" ng-repeat="property in properties track by $index">
                             <td>
                                 <input class="form-control input-lg" type="url" ng-bind="property.link" ng-model="property.link"> </td>
                             <td>
-                                <input class="form-control input-lg" type="text" ng-bind="property.location" ng-model="property.location"> </td>
+                                <input class="form-control input-lg" type="text" ng-bind="property.location" ng-model="property.location"> <a ng-click="viewOnMap(property.latitude,property.longitude)">View on Map <i class="ion-map" ng-click="viewOnMap(property.latitude,property.longitude)"></i></a></td>
                             <td>
                                 <input class="form-control input-lg" type="number" ng-bind="property.pricePerMonth" ng-model="property.pricePerMonth"> </td>
                             <td>

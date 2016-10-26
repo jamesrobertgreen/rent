@@ -9,9 +9,17 @@ app.controller('locationModalController', function ($scope, $modal, $log) {
         , lng: 0
         , address: ""
     };
-    $scope.open = function (size) {
+    $scope.viewOnMap = function (lat, lng) {
+        $scope.geopos.lat = lat;
+        $scope.geopos.lng = lng;
+        $scope.open('lg', 'view-location-modal-template.html');
+    };
+    $scope.selectLocation = function () {
+        $scope.open('lg', 'location-modal-template.html');
+    };
+    $scope.open = function (size, modalTemplate) {
         var modalInstance = $modal.open({
-            templateUrl: 'location-modal-template.html'
+            templateUrl: modalTemplate
             , controller: 'ModalInstanceCtrl'
             , size: size
             , scope: $scope
@@ -36,8 +44,11 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, lat, lng) 
     $scope.validation_text = "";
     $scope.$on('mapInitialized', function (evt, evtMap) {
         $scope.map = evtMap;
+        var initLatLng = new google.maps.LatLng($scope.geopos.lat, $scope.geopos.lng);
+        $scope.map.panTo(initLatLng);
+        $scope.map.setZoom(20);
         $scope.marker = new google.maps.Marker({
-            position: evt.latLng
+            position: initLatLng
             , map: $scope.map
         });
         google.maps.event.trigger($scope.map, 'resize');

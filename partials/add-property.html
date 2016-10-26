@@ -10,7 +10,7 @@
                         <div class="form-group">
                             <input type="url" name="link" required class="form-control input-lg" ng-minlength="1" placeholder="Website where you saw the property" ng-model="link">
                             <div class="form-group">
-                                <button type="button" class="btn btn-lg btn-info" ng-click="open('lg')">Lookup Location</button>
+                                <button type="button" class="btn btn-lg btn-info" ng-click="selectLocation('lg')">Lookup Location</button>
                                 <div ng-include="'partials/location-modal-template.html'"></div>
                                 <input type="text" name="address" required disabled class="form-control input-lg" placeholder="Address" ng-model="selected.address">
                                 <input type="text" required name="latitude" disabled class="form-control input-lg" placeholder="latitude" ng-model="selected.lat">

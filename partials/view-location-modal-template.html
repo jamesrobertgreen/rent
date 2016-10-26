@@ -1,0 +1,12 @@
+<script type="text/ng-template" id="view-location-modal-template.html">
+    <div class="modal-header">
+        <h3 class="modal-title">The property is located here:</h3> </div>
+    <div class="modal-body">
+        <map ng-if="render" zoom-control="true"> </map>
+        <div>{{validation_text}}</div>
+    </div>
+    <div class="modal-footer">
+        <div>Latitude:{{geopos.lat}} Longitude:{{geopos.lng}}</div>
+        <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

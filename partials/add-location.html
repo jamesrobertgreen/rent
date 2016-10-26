@@ -9,7 +9,7 @@
                     <form name="locationForm" ng-submit="locationForm.$valid && addLocation(name,selected.address,selected.lat,selected.lng)">
                         <div class="form-group">
                             <input type="text" name="name" required class="form-control input-lg" placeholder="Name e.g. Work" ng-model="name">
-                            <button type="button" class="btn btn-lg btn-info" ng-click="open('lg')">Lookup Location</button>
+                            <button type="button" class="btn btn-lg btn-info" ng-click="selectLocation('lg')">Lookup Location</button>
                             <input type="text" name="description" disabled required class="form-control input-lg" placeholder="Address e.g. Baker Street" ng-model="selected.address">
                             <input type="text" name="latitude" disabled required class="form-control input-lg" placeholder="latitude" ng-model="selected.lat">
                             <input type="text" name="longitude" disabled required class="form-control input-lg" placeholder="longitude" ng-model="selected.lng"> </div>
