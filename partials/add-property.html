@@ -12,12 +12,21 @@
                             <div class="form-group">
                                 <button type="button" class="btn btn-lg btn-info" ng-click="selectLocation('lg')">Lookup Location</button>
                                 <div ng-include="'partials/location-modal-template.html'"></div>
-                                <input type="text" name="address" required disabled class="form-control input-lg" placeholder="Address" ng-model="selected.address">
-                                <input type="text" required name="latitude" disabled class="form-control input-lg" placeholder="latitude" ng-model="selected.lat">
-                                <input type="text" required name="longitude" disabled class="form-control input-lg" placeholder="longitude" ng-model="selected.lng"> </div>
+                                <input type="text" name="address" required disabled class="form-control input-lg" placeholder="Address" ng-model="selected.address"> </div>
                             <input type="number" step="0.01" name="pricePerWeek" required class="form-control input-lg" ng-change="change('perweek')" placeholder="Price Per Week" ng-model="$parent.pricePerWeek">
                             <input type="number" step="0.01" name="pricePerMonth" required class="form-control input-lg" ng-change="change('permonth')" placeholder="Price Per Month" ng-model="$parent.pricePerMonth">
                             <input type="text" name="notes" class="form-control input-lg" placeholder="Notes" ng-model="notes"> </div>
+                        <div ng-if="propertiesForm.$submitted">
+                            <div ng-messages="propertiesForm.link.$error" style="color:maroon" role="alert">
+                                <div ng-message="required">Please enter a link where the property was advertised</div>
+                            </div>
+                            <div ng-messages="propertiesForm.pricePerWeek.$error || propertiesForm.pricePerMonth.$error" style="color:maroon" role="alert">
+                                <div ng-message="required">Please enter a price</div>
+                            </div>
+                            <div ng-messages="propertiesForm.address.$error || propertiesForm.pricePerMonth.$error" style="color:maroon" role="alert">
+                                <div ng-message="required">Please enter an address</div>
+                            </div>
+                        </div>
                         <button type="submit" class="btn btn-lg btn-primary">Add</button>
                     </form>
                 </div>

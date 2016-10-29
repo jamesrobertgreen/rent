@@ -10,9 +10,15 @@
                         <div class="form-group">
                             <input type="text" name="name" required class="form-control input-lg" placeholder="Name e.g. Work" ng-model="name">
                             <button type="button" class="btn btn-lg btn-info" ng-click="selectLocation('lg')">Lookup Location</button>
-                            <input type="text" name="description" disabled required class="form-control input-lg" placeholder="Address e.g. Baker Street" ng-model="selected.address">
-                            <input type="text" name="latitude" disabled required class="form-control input-lg" placeholder="latitude" ng-model="selected.lat">
-                            <input type="text" name="longitude" disabled required class="form-control input-lg" placeholder="longitude" ng-model="selected.lng"> </div>
+                            <input type="text" name="description" disabled required class="form-control input-lg" placeholder="Address e.g. Baker Street" ng-model="selected.address"> </div>
+                        <div ng-if="locationForm.$submitted">
+                            <div ng-messages="locationForm.name.$error" style="color:maroon" role="alert">
+                                <div ng-message="required">Please enter a location name</div>
+                            </div>
+                            <div ng-messages="locationForm.description.$error" style="color:maroon" role="alert">
+                                <div ng-message="required">Please enter a location</div>
+                            </div>
+                        </div>
                         <div ng-include="'partials/location-modal-template.html'"></div>
                         <button type="submit" class="btn btn-lg btn-primary">Add</button>
                     </form>

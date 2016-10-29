@@ -5,8 +5,8 @@ app.controller('locationModalController', function ($scope, $modal, $log) {
         , address: ""
     };
     $scope.selected = {
-        lat: 0
-        , lng: 0
+        lat: ""
+        , lng: ""
         , address: ""
     };
     $scope.zoom = 20;
