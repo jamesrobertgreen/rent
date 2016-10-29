@@ -13,3 +13,7 @@
 .pac-container {
     z-index: 1051 !important;
 }
+
+.ion-close-circled:hover{
+    cursor: pointer;
+}

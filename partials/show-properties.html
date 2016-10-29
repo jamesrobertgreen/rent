@@ -12,7 +12,7 @@
                             <th>Price Per Calendar Month</th>
                             <th>Notes</th>
                             <th ng-controller="locationController" ng-repeat="loc in locations track by $index"> {{loc.name}}: {{loc.address}}
-                                <button class="btn btn-danger" ng-click="removeLocation($index)">x</button>
+                                <span class="ion-close-circled" ng-click="removeLocation($index)"></span>
                             </th>
                             <th>Remove</th>
                             <th>Update</th>

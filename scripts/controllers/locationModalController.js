@@ -9,6 +9,7 @@ app.controller('locationModalController', function ($scope, $modal, $log) {
         , lng: 0
         , address: ""
     };
+    $scope.zoom = 20;
     $scope.viewOnMap = function (lat, lng) {
         $scope.geopos.lat = lat;
         $scope.geopos.lng = lng;
@@ -75,7 +76,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, lat, lng) 
             }
             else {
                 $scope.map.setCenter(place.geometry.location);
-                $scope.map.setZoom(15);
+                $scope.map.setZoom($scope.zoom);
             }
             $scope.marker.setPosition(place.geometry.location);
             $scope.geopos.lat = place.geometry.location.lat();
@@ -88,7 +89,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, lat, lng) 
             $scope.validation_text = "";
             $scope.marker.setPosition(evt.latLng);
             $scope.map.panTo(evt.latLng);
-            $scope.map.setZoom(10);
+            $scope.map.setZoom($scope.zoom);
             $scope.geopos.lat = latitude;
             $scope.geopos.lng = longitude;
             setAddress(evt.latLng.lat(), evt.latLng.lng());
