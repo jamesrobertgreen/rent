@@ -63,6 +63,8 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, lat, lng) 
             position: initLatLng
             , map: $scope.map
         });
+        google.maps.event.trigger($scope.map, 'resize');
+        $scope.map.setCenter(initLatLng);
         var input = document.getElementById("keyword");
         var autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.bindTo("bounds", $scope.map);
@@ -91,8 +93,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, lat, lng) 
             $scope.geopos.lng = longitude;
             setAddress(evt.latLng.lat(), evt.latLng.lng());
         }
-        google.maps.event.trigger($scope.map, 'resize');
-        $scope.map.setCenter(initLatLng);
+        setAddress($scope.geopos.lat, $scope.geopos.lng);
     });
     var setAddress = function (lat, lng) {
         var geocoder = new google.maps.Geocoder();
