@@ -17,3 +17,11 @@
 .ion-close-circled:hover{
     cursor: pointer;
 }
+
+.link:hover{
+    cursor: pointer;
+}
+
+.table-container{
+    overflow-x: auto; 
+}
