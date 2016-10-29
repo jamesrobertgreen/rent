@@ -2,6 +2,11 @@
     <div class="modal-header">
         <h3 class="modal-title">Select your location</h3> </div>
     <div class="modal-body">
+        <div class="control-group">
+            <label class="control-label" for="keyword">Search</label>
+            <div class="controls">
+                <input type="text" name="keyword" id="keyword"> </div>
+        </div>
         <map ng-if="render" center="[{{geopos.lat}}, {{geopos.lng}}]" zoom-control="true" zoom="10" on-click="click()"> </map>
         <div>{{validation_text}}</div>
     </div>
